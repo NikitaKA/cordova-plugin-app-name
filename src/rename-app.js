@@ -3,6 +3,7 @@
 var fs = require('fs');
 var path = require("path");
 var xml2js = require('xml2js');
+var semver = require('semver');
 var parser = new xml2js.Parser();
 var builder = new xml2js.Builder({
     xmldec: {
@@ -54,8 +55,6 @@ module.exports = function (context) {
 };
 
 function getConfigParser(context, config) {
-    var semver = context.requireCordovaModule('semver');
-
     if (semver.lt(context.opts.cordova.version, '5.4.0')) {
         ConfigParser = context.requireCordovaModule('cordova-lib/src/ConfigParser/ConfigParser');
     } else {
